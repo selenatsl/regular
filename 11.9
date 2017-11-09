@@ -1,0 +1,6 @@
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+import re
+phone = "1998-1101-0645 #33333333333"
+num = re.sub(r'#.*$',"",phone)
+print "电话号码是：",num
