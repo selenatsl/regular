@@ -1,0 +1,13 @@
+ls = ['chinese','math','physics'];
+>>> ls2 = [1,2,3,4,5]
+>>> ls2 = [1,2,3,4,5];
+>>> print "ls[0]=",ls[0]
+ls[0]= chinese
+>>> print "ls2=",ls2[1:5]
+ls2= [2, 3, 4, 5]
+>>> 
+>>> del ls[0];
+>>> print "after deleting value at index :"
+after deleting value at index :
+>>> print ls
+['math', 'physics']
