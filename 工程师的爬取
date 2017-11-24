@@ -1,0 +1,50 @@
+import urllib
+import urllib2
+import re
+for j in range(1, 11):
+    
+    url = "http://search.51job.com/list/020000,000000,0000,00,9,99,%25E5%25B7%25A5%25E7%25A8%258B%25E5%25B8%2588,2,"+str(j)+".html" 
+    user_agent = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.75 Safari/537.36'
+    headers = { 'User-Agent' : user_agent }
+    try:
+        request = urllib2.Request(url,headers = headers)
+        response = urllib2.urlopen(request)
+        content = response.read().decode('gbk') 
+        pattern = re.compile('<span>.*?<a target="_blank" .*?title="(.*?)"',re.S)
+        money = re.compile('<span class="t4">(.*?) </span>',re.S)
+        items = re.findall(pattern,content)
+        items2 = re.findall(money,content)
+        for i in range(1, len(items)-1):
+            print items[i]
+            print items2[i]
+            #haveImg = re.search("img",item[3])
+            #if not haveImg:
+                #print item[0],item[1],item[2],item[4]
+    except urllib2.URLError, e:
+        if hasattr(e,"code"):
+            print e.code
+        if hasattr(e,"reason"):
+            print e.reason
+===================== RESTART: C:/Users/hp/Desktop/12.py =====================
+汽车工程师（上汽大众）
+12.5-21.9万/年
+弱电工程师
+1-1.5万/月
+高级电源设计工程师/高级电源研发工程师
+1.5-2万/月
+硬件工程师
+4.5-6千/月
+售后工程师
+4.5-8千/月
+事业三部技术设计（暖通）工程师
+0.7-1.2万/月
+系统运维监控工程师
+6-8千/月
+机械工程师
+1-1.5万/月
+QC工程师
+4-7千/月
+软件开发工程师
+5-8千/月
+高级景观设计师 景观工程师
+1.5-2千/月
