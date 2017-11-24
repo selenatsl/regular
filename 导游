@@ -1,0 +1,27 @@
+import urllib
+import urllib2
+import re
+for j in range(1, 3):
+    
+    url = "http://search.51job.com/jobsearch/search_result.php?fromJs=1&jobarea=020000&keyword=%E5%AF%BC%E6%B8%B8&keywordtype=2&lang=c&stype=2&postchannel=0000&fromType=1&confirmdate=9" 
+    user_agent = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.75 Safari/537.36'
+    headers = { 'User-Agent' : user_agent }
+    try:
+        request = urllib2.Request(url,headers = headers)
+        response = urllib2.urlopen(request)
+        content = response.read().decode('gbk') 
+        pattern = re.compile('<span>.*?<a target="_blank" .*?title="(.*?)"',re.S)
+        money = re.compile('<span class="t4">(.*?) </span>',re.S)
+        items = re.findall(pattern,content)
+        items2 = re.findall(money,content)
+        for i in range(1, len(items)-1):
+            print items[i]
+            print items2[i]
+            #haveImg = re.search("img",item[3])
+            #if not haveImg:
+                #print item[0],item[1],item[2],item[4]
+    except urllib2.URLError, e:
+        if hasattr(e,"code"):
+            print e.code
+        if hasattr(e,"reason"):
+            print e.reason
