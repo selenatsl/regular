@@ -1,30 +1,54 @@
 import urllib
 import urllib2
 import re
-for j in range(1, 11):
-    
-    url = "http://search.51job.com/list/020000,000000,0000,00,9,99,%25E5%25B7%25A5%25E7%25A8%258B%25E5%25B8%2588,2,"+str(j)+".html" 
+for j in range(1, 20):
+    url = "http://search.51job.com/list/070400,000000,0000,00,9,99,%25E5%25B7%25A5%25E7%25A8%258B%25E5%25B8%2588,2,1.html?lang=c&stype=&postchannel=0000&workyear=99&cotype=99&degreefrom=99&jobterm=99&companysize=99&providesalary=99&lonlat=0%2C0&radius=-1&ord_field=0&confirmdate=9&fromType=&dibiaoid=0&address=&line=&specialarea=00&from=&welfare="
     user_agent = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.75 Safari/537.36'
     headers = { 'User-Agent' : user_agent }
     try:
         request = urllib2.Request(url,headers = headers)
         response = urllib2.urlopen(request)
-        content = response.read().decode('gbk') 
-        pattern = re.compile('<span>.*?<a target="_blank" .*?title="(.*?)"',re.S)
-        money = re.compile('<span class="t4">(.*?) </span>',re.S)
-        items = re.findall(pattern,content)
-        items2 = re.findall(money,content)
-        for i in range(1, len(items)-1):
-            print items[i]
-            print items2[i]
-            #haveImg = re.search("img",item[3])
-            #if not haveImg:
-                #print item[0],item[1],item[2],item[4]
+        content = response.read().decode('gbk')
+        position = re.compile('<span>.*?<a target="_blank" title="(.*?)"',re.S)
+        company = re.compile('<span class="t2"><a target="_blank" title="(.*?)"',re.S)
+        place = re.compile('<span class="t3">(.*?)</span>',re.S)
+        salary =re.compile('<span class="t4">(.*?)</span>',re.S)
+        time= re.compile('<span class="t5">(.*?)</span>', re.S)
+        items = re.findall(position,content)
+        items2 = re.findall(company,content)
+        items3 = re.findall(place,content)
+        items4 =re.findall(salary,content)
+        items5 = re.findall(time, content)
+        items3 = items3[1:]
+        items4 = items4[1:]
+        items5 = items5[1:]
+        # print len(items)
+        # print len(items2)
+        # print len(items3)
+        # print len(items4)
+        # print len(items5)
+        for i in range(0, len(items)):
+            print "position:",items[i]
+            print "company:",items2[i]
+            print "place:",items3[i]
+            print "salary:",items4[i]
+            print "time:", items5[i]
+            print "---------------------------------------"
+        #haveImg = re.search("img",item[3])
+        #if not haveImg:
+        #print item[0],item[1],item[2],item[4]
+        input = raw_input()
+        if input == "" :
+            continue
+        else:
+            break
     except urllib2.URLError, e:
         if hasattr(e,"code"):
             print e.code
         if hasattr(e,"reason"):
             print e.reason
+
+
 ===================== RESTART: C:/Users/hp/Desktop/12.py =====================
 汽车工程师（上汽大众）
 12.5-21.9万/年
